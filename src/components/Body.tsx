@@ -1,15 +1,14 @@
 import React, { FunctionComponent } from "react";
 import { useTodoContext } from "../providers";
+import { TodoItemComponent } from "./TodoItem";
 
 export const Body: FunctionComponent = () => {
-  const { todoItems } = useTodoContext();
+  const { todoItems, removeTodoItem } = useTodoContext();
 
   return (
     <div className="main-body">
-      {todoItems.map((item) => (
-        <div className="todo-item">
-          {item.name} due date: {item.dueDate.toISOString()}{" "}
-        </div>
+      {todoItems.map((item, i) => (
+        <TodoItemComponent item={item} onDelete={() => removeTodoItem(i)}/>
       ))}
     </div>
   );

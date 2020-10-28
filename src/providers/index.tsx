@@ -4,7 +4,7 @@ import { TodoItem } from '../types';
 export type TodoContext = {
     todoItems: TodoItem[];
     addTodoItem: (todoItem: TodoItem) => void;
-    removeTodoItem: () => void;
+    removeTodoItem: (id: number) => void;
 };
 
 const defaultTodoContext: TodoContext = {
@@ -21,7 +21,9 @@ export const TodoProvider: FunctionComponent = ({children}) => {
     const [todoItems, setTodoItems] = useState<TodoItem[]>([]);
 
     const addTodoItem = (todoItem: TodoItem) => setTodoItems([...todoItems, todoItem]);
-    const removeTodoItem = () => {};
+    const removeTodoItem = (id: number) => {
+        setTodoItems(todoItems.filter((_, i) => i !== id))
+    };
 
     const value: TodoContext = {
         todoItems,
