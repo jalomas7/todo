@@ -1,13 +1,9 @@
 import React, { FunctionComponent, useState } from 'react';
-import { useTodoContext } from '../providers';
+import {ItemForm} from './ItemForm';
 
 export const Header: FunctionComponent = () => {
 
     const [addingItem, setAddingItem] = useState<boolean>(false);
-    const [itemName, setItemName] = useState<string>('');
-    const [itemDueDate, setItemDueDate] = useState<Date>(new Date());
-
-    const {addTodoItem} = useTodoContext();
 
     return (
       <header className="main-header">
@@ -18,19 +14,7 @@ export const Header: FunctionComponent = () => {
           +
         </button>
         {addingItem && (
-          <div className="add-todo-item-menu">
-            <input type="text" onChange={(e) => setItemName(e.target.value)} />
-            <input
-              type="datetime-local"
-              onChange={(e) => setItemDueDate(new Date(e.target.value))}
-            />
-            <button
-              onClick={() => {
-                addTodoItem({ name: itemName, dueDate: itemDueDate });
-                setAddingItem(false);
-              }}
-            />
-          </div>
+          <ItemForm onItemAdded={() => setAddingItem(false)}/>
         )}
       </header>
     );
