@@ -3,12 +3,16 @@ import { useTodoContext } from "../providers";
 import { TodoItemComponent } from "./TodoItem";
 
 export const Body: FunctionComponent = () => {
-  const { todoItems, removeTodoItem } = useTodoContext();
+  const { todoItems, removeTodoItem, markItemComplete } = useTodoContext();
 
   return (
     <div className="main-body">
       {todoItems.map((item, i) => (
-        <TodoItemComponent item={item} onDelete={() => removeTodoItem(i)}/>
+        <TodoItemComponent
+          item={item}
+          onDelete={() => removeTodoItem(i)}
+          onComplete={() => markItemComplete(i)}
+        />
       ))}
     </div>
   );

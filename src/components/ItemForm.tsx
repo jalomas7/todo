@@ -19,7 +19,7 @@ export const ItemForm: FunctionComponent<Props> = ({onItemAdded}) => {
         />
         <button
           onClick={() => {
-            addTodoItem({ name: itemName, dueDate: itemDueDate });
+            addTodoItem({ name: itemName, dueDate: itemDueDate, completed: false});
             onItemAdded();
           }}
         />

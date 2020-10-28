@@ -3,17 +3,30 @@
     width: fit-content;
     background-color: lightpink;
     border: 1px solid black;
-    padding: 10px 20px 10px 10px;
+    padding: 10px 50px 10px 10px;
     position: relative;
 }
 
 .todo-item-delete-button {
     position: absolute;
+    width: 15px;
     background-color: lightgray;
     right: 2px;
     top: 2px;
 }
 
 .todo-item-delete-button:hover {
+    background-color: gray;
+}
+
+.todo-item-complete-button {
+    position: absolute;
+    width: 15px;
+    background-color: lightgray;
+    right: 20px;
+    top: 2px;
+}
+
+.todo-item-complete-button:hover {
     background-color: gray;
 }
