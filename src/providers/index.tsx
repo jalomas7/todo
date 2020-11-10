@@ -4,8 +4,8 @@ import { TodoItem } from '../types';
 export type TodoContext = {
     todoItems: TodoItem[];
     addTodoItem: (todoItem: TodoItem) => void;
-    removeTodoItem: (id: number) => void;
-    markItemComplete: (id: number) => void;
+    removeTodoItem: (id: string) => void;
+    markItemComplete: (id: string) => void;
 };
 
 const defaultTodoContext: TodoContext = {
@@ -23,15 +23,20 @@ export const TodoProvider: FunctionComponent = ({children}) => {
     const [todoItems, setTodoItems] = useState<TodoItem[]>([]);
 
     const addTodoItem = (todoItem: TodoItem) => setTodoItems([...todoItems, todoItem]);
-    const removeTodoItem = (id: number) => {
-        setTodoItems(todoItems.filter((_, i) => i !== id))
+    const removeTodoItem = (id: string) => {
+        setTodoItems(todoItems.filter((item) => item.id !== id))
     };
 
-    const markItemComplete = (id: number) => {
+    const markItemComplete = (id: string) => {
         const newItems = todoItems.slice();
-        newItems[id].completed = true;
+        const item = todoItems.findIndex(item => item.id === id);
+        if(item === -1) {
+            return;
+        }
+
+        newItems[item].completed = true;
         setTodoItems(newItems);
-    };
+    }
 
     const value: TodoContext = {
         todoItems,

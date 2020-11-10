@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useTodoContext } from '../providers';
+import {uuid} from '../utils';
 
 type Props = {
     onItemAdded: () => void;
@@ -19,7 +20,7 @@ export const ItemForm: FunctionComponent<Props> = ({onItemAdded}) => {
         />
         <button
           onClick={() => {
-            addTodoItem({ name: itemName, dueDate: itemDueDate, completed: false});
+            addTodoItem({ name: itemName, dueDate: itemDueDate, completed: false, id: uuid()});
             onItemAdded();
           }}
         />
