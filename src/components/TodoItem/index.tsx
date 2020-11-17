@@ -15,7 +15,7 @@ export const TodoItemComponent: FunctionComponent<TodoItemComponentProps> = ({
 }) => {
   return (
     <div className="todo-item">
-      {name} due date: {dueDate.toISOString()}{" "}, completed?: {completed ? 'true' : 'false'}
+      {name} due date: {dueDate}{" "}, completed?: {completed ? 'true' : 'false'}
       <div className="todo-item-complete-button" onClick={() => onComplete(id)}>✓</div>
       <div className="todo-item-delete-button" onClick={() => onDelete(id)}>X</div>
     </div>

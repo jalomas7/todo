@@ -7,6 +7,7 @@ export const Header: FunctionComponent = () => {
 
     return (
       <header className="main-header">
+        <input placeholder='list name'></input>
         <button
           className="add-todo-item-button"
           onClick={() => setAddingItem(true)}

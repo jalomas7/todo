@@ -8,7 +8,7 @@ type Props = {
 
 export const ItemForm: FunctionComponent<Props> = ({onItemAdded}) => {
     const [itemName, setItemName] = useState<string>('');
-    const [itemDueDate, setItemDueDate] = useState<Date>(new Date());
+    const [itemDueDate, setItemDueDate] = useState<string>(new Date().toISOString());
 
     const {addTodoItem} = useTodoContext();
     return (
@@ -16,7 +16,7 @@ export const ItemForm: FunctionComponent<Props> = ({onItemAdded}) => {
         <input type="text" onChange={(e) => setItemName(e.target.value)} />
         <input
           type="datetime-local"
-          onChange={(e) => setItemDueDate(new Date(e.target.value))}
+          onChange={(e) => setItemDueDate(new Date(e.target.value).toISOString())}
         />
         <button
           onClick={() => {
