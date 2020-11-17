@@ -1,22 +1,25 @@
-import React, { FunctionComponent, useState } from 'react';
-import {ItemForm} from './ItemForm';
+import React, { FunctionComponent, useState } from "react";
+import { useTodoContext } from "../providers";
+import { ItemForm } from "./ItemForm";
 
 export const Header: FunctionComponent = () => {
+  const [addingItem, setAddingItem] = useState<boolean>(false);
+  const { listName, setListName } = useTodoContext();
 
-    const [addingItem, setAddingItem] = useState<boolean>(false);
-
-    return (
-      <header className="main-header">
-        <input placeholder='list name'></input>
-        <button
-          className="add-todo-item-button"
-          onClick={() => setAddingItem(true)}
-        >
-          +
-        </button>
-        {addingItem && (
-          <ItemForm onItemAdded={() => setAddingItem(false)}/>
-        )}
-      </header>
-    );
-}
+  return (
+    <header className="main-header">
+      <input
+        placeholder="list name"
+        value={listName}
+        onChange={(e) => setListName(e.target.value)}
+      />
+      <button
+        className="add-todo-item-button"
+        onClick={() => setAddingItem(true)}
+      >
+        +
+      </button>
+      {addingItem && <ItemForm onItemAdded={() => setAddingItem(false)} />}
+    </header>
+  );
+};

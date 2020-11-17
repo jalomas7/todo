@@ -12,6 +12,8 @@ export type TodoContext = {
   addTodoItem: (todoItem: TodoItem) => void;
   removeTodoItem: (id: string) => void;
   markItemComplete: (id: string) => void;
+  listName: string;
+  setListName: (k: string) => void;
 };
 
 const defaultTodoContext: TodoContext = {
@@ -19,6 +21,8 @@ const defaultTodoContext: TodoContext = {
   addTodoItem: () => {},
   removeTodoItem: () => {},
   markItemComplete: () => {},
+  listName: '',
+  setListName: () => {}
 };
 
 const TodoContext = createContext<TodoContext>(defaultTodoContext);
@@ -29,11 +33,21 @@ export const TodoProvider: FunctionComponent = ({ children }) => {
     () => JSON.parse(window.localStorage.getItem("todo-items") || "[]"),
     []
   );
+  const storedListName = useMemo(
+    () => window.localStorage.getItem("todo-list-name"),
+    []
+  );
   const setStoredTodoItems = (items: TodoItem[]): void => {
     window.localStorage.setItem("todo-items", JSON.stringify(items));
   };
 
   const [todoItems, setTodoItems] = useState<TodoItem[]>(storedTodoItems);
+  const [listName, setListName] = useState<string>(storedListName || '')
+
+  const setStoredListName = (name: string) => {
+      setListName(name)
+      window.localStorage.setItem('todo-list-name', name);
+  } 
 
   const addTodoItem = (todoItem: TodoItem) => {
     setTodoItems([...todoItems, todoItem]);
@@ -62,6 +76,8 @@ export const TodoProvider: FunctionComponent = ({ children }) => {
     addTodoItem,
     removeTodoItem,
     markItemComplete,
+    listName,
+    setListName: setStoredListName
   };
 
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
